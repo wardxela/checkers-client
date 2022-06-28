@@ -1,0 +1,23 @@
+.cell {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.dark {
+  background-color: rgb(121, 77, 42);
+}
+
+.light {
+  background-color: rgb(255, 200, 128);
+}
+
+.tip::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(136, 255, 100, 0.5);
+}

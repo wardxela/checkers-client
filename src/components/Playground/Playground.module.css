@@ -1,0 +1,6 @@
+.field {
+  --cell-size: max(5vw, 50px);
+  display: grid;
+  justify-content: center;
+  grid-template: repeat(8, var(--cell-size)) / repeat(8, var(--cell-size));
+}

@@ -1,0 +1,21 @@
+.checker {
+  width: 75%;
+  height: 75%;
+  border-radius: 50%;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.clicked {
+  box-shadow: 0 0 5px #000;
+}
+
+.black {
+  background-color: rgb(48, 36, 21);
+}
+
+.white {
+  background-color: rgb(255, 212, 174);
+}
