@@ -1,16 +1,13 @@
 import { GameState } from '../../../hooks';
-import {
-  CheckersManager,
-  CheckerStaticInfo,
-} from '../../../services/checkers-manager';
 import { Checker } from '../../Checker/Checker';
 import classes from '../Cell.module.css';
 
 interface CellWithCheckerProps {
-  checkersManager: CheckersManager;
-  checkerStaticInfo: CheckerStaticInfo;
-  gameState: GameState;
   color: string;
+  gameState: GameState;
+  whose: string;
+  x: number;
+  y: number;
 }
 
 export function CellWithChecker({ color, ...props }: CellWithCheckerProps) {

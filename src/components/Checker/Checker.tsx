@@ -3,7 +3,7 @@ import { ClientChecker } from './States/ClientChecker';
 import { OpponentChecker } from './States/OpponentChecker';
 
 export function Checker(props: CheckerProps) {
-  if (props.checkerStaticInfo.whose === 'mine') {
+  if (props.whose === 'mine') {
     return <ClientChecker {...props} />;
   }
 

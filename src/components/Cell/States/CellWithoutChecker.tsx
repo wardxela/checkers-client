@@ -1,11 +1,9 @@
 import { MouseEventHandler } from 'react';
 import { GameState } from '../../../hooks';
-import { CheckersManager } from '../../../services/checkers-manager';
 import { coordsInArr } from '../../../utils';
 import classes from '../Cell.module.css';
 
 interface CellWithoutCheckerProps {
-  checkersManager: CheckersManager;
   gameState: GameState;
   color: string;
   x: number;

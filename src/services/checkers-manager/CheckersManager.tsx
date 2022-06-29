@@ -1,7 +1,7 @@
 import { CheckerStaticInfo, Coords } from './types';
 
 export class CheckersManager {
-  private data: CheckerStaticInfo[];
+  private readonly data: CheckerStaticInfo[];
   private opponent: string;
   private client: string;
 

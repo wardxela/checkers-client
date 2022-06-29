@@ -5,7 +5,11 @@ import {
   CheckersStateAction,
   CheckersStateActionTypes,
 } from '../reducers';
-import { CheckerStaticInfo, Coords } from '../services/checkers-manager';
+import {
+  CheckersManager,
+  CheckerStaticInfo,
+  Coords,
+} from '../services/checkers-manager';
 
 export interface GameState {
   checkers: CheckersState;
@@ -14,12 +18,14 @@ export interface GameState {
   setHintCells: Dispatch<SetStateAction<Coords[]>>;
   selectedChecker: Coords | undefined;
   setSelectedChecker: Dispatch<SetStateAction<Coords | undefined>>;
+  checkersManager: CheckersManager;
 }
 
 export function useGameState(initCheckerInfo: CheckerStaticInfo[]): GameState {
   const [checkers, dispatch] = useReducer(checkersReducer, initCheckerInfo);
   const [hintCells, setHintCells] = useState<Coords[]>([]);
   const [selectedChecker, setSelectedChecker] = useState<Coords>();
+  const checkersManager = new CheckersManager(checkers);
 
   const gameState = {
     checkers,
@@ -28,6 +34,7 @@ export function useGameState(initCheckerInfo: CheckerStaticInfo[]): GameState {
     setHintCells,
     selectedChecker,
     setSelectedChecker,
+    checkersManager,
   };
 
   return gameState;

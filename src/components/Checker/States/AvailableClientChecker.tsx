@@ -1,13 +1,8 @@
 import { CheckerProps } from '../CheckerProps';
 import classes from '../Checker.module.css';
 
-export function AvailableClientChecker({
-  checkerStaticInfo,
-  checkersManager,
-  gameState,
-}: CheckerProps) {
-  const { x, y } = checkerStaticInfo;
-  const { setHintCells, setSelectedChecker } = gameState;
+export function AvailableClientChecker({ gameState, x, y }: CheckerProps) {
+  const { setHintCells, setSelectedChecker, checkersManager } = gameState;
 
   const styles = `${classes.checker} ${classes.white} ${classes.clickable}`;
 
