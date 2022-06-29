@@ -1,19 +1,27 @@
-import { CheckerInfo } from '../../services/checkers-manager';
+import { CheckersManager } from '../../services/checkers-manager';
+import { isCellDark } from '../../utils';
 import { Checker } from '../Checker/Checker';
 import classes from './Cell.module.css';
 
 interface CellProps {
-  isDark: boolean;
-  checkerInfo?: CheckerInfo;
-  allowed: boolean;
+  x: number;
+  y: number;
+  checkersManager: CheckersManager;
 }
 
-export function Cell({ isDark, checkerInfo, allowed }: CellProps) {
-  const color = isDark ? classes.dark : classes.light;
+export function Cell({ x, y, checkersManager }: CellProps) {
+  const color = isCellDark(x, y) ? classes.dark : classes.light;
+  const styles = `${classes.cell} ${color}`;
+
+  const checker = checkersManager.getChecker(x, y);
+
+  if (!checker) {
+    return <div className={styles}></div>;
+  }
 
   return (
-    <div className={`${classes.cell} ${color} ${allowed ? classes.tip : ''}`}>
-      {checkerInfo && <Checker {...checkerInfo} />}
+    <div className={styles}>
+      <Checker checkerStaticInfo={checker} checkersManager={checkersManager} />
     </div>
   );
 }

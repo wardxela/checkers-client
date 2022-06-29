@@ -1,11 +1,11 @@
 import { CheckerProps } from './CheckerProps';
-import { MyChecker } from './MyChecker';
+import { ClientChecker } from './ClientChecker';
 import { OpponentChecker } from './OpponentChecker';
 
 export function Checker(props: CheckerProps) {
-  if (props.whose === 'mine') {
-    return <MyChecker {...props} />;
+  if (props.checkerStaticInfo.whose === 'mine') {
+    return <ClientChecker {...props} />;
   }
 
-  return <OpponentChecker {...props} />;
+  return <OpponentChecker />;
 }
