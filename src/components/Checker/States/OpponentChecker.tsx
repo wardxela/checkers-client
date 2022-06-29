@@ -1,4 +1,4 @@
-import classes from './Checker.module.css';
+import classes from '../Checker.module.css';
 
 export function OpponentChecker() {
   const className = `${classes.checker} ${classes.black}`;

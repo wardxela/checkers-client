@@ -1,6 +1,4 @@
-import { CheckerStaticInfo } from './types';
-
-type Coords = [number, number];
+import { CheckerStaticInfo, Coords } from './types';
 
 export class CheckersManager {
   private data: CheckerStaticInfo[];

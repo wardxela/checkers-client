@@ -1,3 +1,4 @@
+import { GameState } from '../../hooks';
 import {
   CheckersManager,
   CheckerStaticInfo,
@@ -6,4 +7,5 @@ import {
 export interface CheckerProps {
   checkerStaticInfo: CheckerStaticInfo;
   checkersManager: CheckersManager;
+  gameState: GameState;
 }

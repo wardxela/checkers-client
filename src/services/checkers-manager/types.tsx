@@ -3,3 +3,5 @@ export interface CheckerStaticInfo {
   y: number;
   whose: 'mine' | 'opponent';
 }
+
+export type Coords = [number, number];

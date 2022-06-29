@@ -6,12 +6,13 @@ import {
 } from '../../services/checkers-manager';
 import { genMatrixMemberID } from '../../utils';
 import { Cell } from '../Cell/Cell';
+import { useGameState } from '../../hooks';
 
 export function Playground() {
+  const gameState = useGameState(initCheckersInfo as CheckerStaticInfo[]);
+
   const cells: JSX.Element[] = [];
-  const checkersManager = new CheckersManager(
-    initCheckersInfo as CheckerStaticInfo[]
-  );
+  const checkersManager = new CheckersManager(gameState.checkers);
 
   for (let x = 0; x < 8; x++) {
     for (let y = 0; y < 8; y++) {
@@ -21,6 +22,7 @@ export function Playground() {
           x={x}
           y={y}
           checkersManager={checkersManager}
+          gameState={gameState}
         />
       );
     }
