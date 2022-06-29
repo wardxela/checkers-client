@@ -16,7 +16,8 @@ export function CellWithoutChecker({
   x,
   y,
 }: CellWithoutCheckerProps) {
-  const { hintCells, selectedChecker, setHintCells, dispatch } = gameState;
+  const { hintCells, selectedChecker, setCanMove, setHintCells, dispatch } =
+    gameState;
 
   const hintColor = coordsInArr([x, y], hintCells) ? classes.hint : '';
   const styles = `${classes.cell} ${color} ${hintColor}`;
@@ -34,6 +35,7 @@ export function CellWithoutChecker({
           toY: y,
         },
       });
+      setCanMove(false);
       setHintCells([]);
     };
   }

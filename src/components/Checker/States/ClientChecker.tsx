@@ -8,7 +8,7 @@ export function ClientChecker(props: CheckerProps) {
     props.y
   );
 
-  if (allowedCells.length) {
+  if (allowedCells.length && props.gameState.canMove) {
     return <AvailableClientChecker {...props} />;
   }
 
