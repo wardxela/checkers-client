@@ -1,4 +1,4 @@
-import { CheckerStaticInfo, Coords } from './types';
+import { CheckerStaticInfo, Coords, Direction } from './types';
 
 export class CheckersManager {
   private readonly data: CheckerStaticInfo[];
@@ -20,34 +20,40 @@ export class CheckersManager {
   public getAllowedCells(x: number, y: number) {
     let allowedCells: Coords[] = [];
 
-    // left-top corner
+    // top-left corner
     allowedCells = allowedCells.concat(
-      this.getAllowedCellsFromCorner(x - 1, y - 1)
+      this.getAllowedCellsFromCorner(x, y, 'tl')
     );
 
-    // right-top corner
+    // top-right corner
     allowedCells = allowedCells.concat(
-      this.getAllowedCellsFromCorner(x - 1, y + 1)
+      this.getAllowedCellsFromCorner(x, y, 'tr')
     );
 
-    // left-bottom corner
+    // bottom-left corner
     allowedCells = allowedCells.concat(
-      this.getAllowedCellsFromCorner(x + 1, y - 1)
+      this.getAllowedCellsFromCorner(x, y, 'bl')
     );
 
-    // right-bottom corner
+    // bottom-right corner
     allowedCells = allowedCells.concat(
-      this.getAllowedCellsFromCorner(x + 1, y + 1)
+      this.getAllowedCellsFromCorner(x, y, 'br')
     );
 
     return allowedCells;
   }
 
-  private getAllowedCellsFromCorner(x: number, y: number): Coords[] {
-    const checker = this.getChecker(x, y);
+  private getAllowedCellsFromCorner(
+    fromX: number,
+    fromY: number,
+    direction: Direction
+  ): Coords[] {
+    const [toX, toY] = this.getCoords(fromX, fromY, direction);
+    const checker = this.getChecker(toX, toY);
     const allowedCells: Coords[] = [];
 
-    const isOutOfPlayground = x === -1 || x === 8 || y === -1 || y === 8;
+    const isOutOfPlayground =
+      toX === -1 || toX === 8 || toY === -1 || toY === 8;
 
     if (isOutOfPlayground) {
       return allowedCells;
@@ -55,11 +61,25 @@ export class CheckersManager {
 
     if (checker) {
       if (checker.whose === this.opponent) {
+        // allowedCells.push(getAllowedCellsFromCorner(toX, toY));
       }
     } else {
-      allowedCells.push([x, y]);
+      allowedCells.push([toX, toY]);
     }
 
     return allowedCells;
+  }
+
+  private getCoords(x: number, y: number, direction: Direction): Coords {
+    switch (direction) {
+      case 'tl':
+        return [x - 1, y - 1];
+      case 'tr':
+        return [x - 1, y + 1];
+      case 'bl':
+        return [x + 1, y - 1];
+      case 'br':
+        return [x + 1, y + 1];
+    }
   }
 }
