@@ -31,7 +31,7 @@ export function CellWithoutChecker(props: CellWithoutCheckerProps) {
           toY: y,
         },
       });
-      setCanMove(false);
+      // setCanMove(false);
       setHintCells([]);
     };
   }

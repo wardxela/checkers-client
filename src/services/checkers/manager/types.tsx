@@ -6,5 +6,17 @@ export interface CheckerStaticInfo {
 }
 
 export type Coords = [number, number];
+export type Path = Coords[];
 
-export type Direction = 'tl' | 'tr' | 'bl' | 'br';
+interface DirectionsMap {
+  tl: any;
+  tr: any;
+  bl: any;
+  br: any;
+}
+
+export type Direction = keyof DirectionsMap;
+
+export type OppositeDirections = {
+  [Property in keyof DirectionsMap]: Direction;
+};

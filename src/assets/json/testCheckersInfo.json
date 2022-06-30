@@ -1,0 +1,118 @@
+[
+  {
+    "x": 0,
+    "y": 1,
+    "whose": "opponent"
+  },
+  {
+    "x": 0,
+    "y": 3,
+    "whose": "opponent"
+  },
+  {
+    "x": 0,
+    "y": 5,
+    "whose": "opponent"
+  },
+  {
+    "x": 0,
+    "y": 7,
+    "whose": "opponent"
+  },
+  {
+    "x": 1,
+    "y": 2,
+    "whose": "opponent"
+  },
+  {
+    "x": 2,
+    "y": 5,
+    "whose": "opponent"
+  },
+  {
+    "x": 1,
+    "y": 6,
+    "whose": "opponent"
+  },
+  {
+    "x": 2,
+    "y": 1,
+    "whose": "opponent"
+  },
+  {
+    "x": 2,
+    "y": 3,
+    "whose": "opponent"
+  },
+  {
+    "x": 4,
+    "y": 3,
+    "whose": "opponent"
+  },
+  {
+    "x": 2,
+    "y": 7,
+    "whose": "opponent"
+  },
+
+  {
+    "x": 5,
+    "y": 0,
+    "whose": "mine"
+  },
+  {
+    "x": 5,
+    "y": 2,
+    "whose": "mine"
+  },
+  {
+    "x": 5,
+    "y": 4,
+    "whose": "mine"
+  },
+  {
+    "x": 5,
+    "y": 6,
+    "whose": "mine"
+  },
+  {
+    "x": 6,
+    "y": 1,
+    "whose": "mine"
+  },
+  {
+    "x": 6,
+    "y": 3,
+    "whose": "mine"
+  },
+  {
+    "x": 6,
+    "y": 5,
+    "whose": "mine"
+  },
+  {
+    "x": 6,
+    "y": 7,
+    "whose": "mine"
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "whose": "mine"
+  },
+  {
+    "x": 7,
+    "y": 2,
+    "whose": "mine"
+  },
+  {
+    "x": 7,
+    "y": 4,
+    "whose": "mine"
+  },
+  {
+    "x": 7,
+    "y": 6,
+    "whose": "mine"
+  }
+]

@@ -1,4 +1,4 @@
-import initCheckersInfo from '../../assets/json/initCheckersInfo.json';
+import initCheckersInfo from '../../assets/json/testCheckersInfo.json';
 import classes from './Playground.module.css';
 import { genMatrixMemberID } from '../../utils';
 import { Cell } from '../Cell/Cell';

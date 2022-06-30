@@ -1,4 +1,18 @@
-import { CheckerStaticInfo, Coords, Direction } from './types';
+import {
+  CheckerStaticInfo,
+  Coords,
+  Direction,
+  OppositeDirections,
+  Path,
+} from './types';
+
+const directions: Direction[] = ['tl', 'tr', 'bl', 'br'];
+const oppositeDirections: OppositeDirections = {
+  tl: 'br',
+  tr: 'bl',
+  bl: 'tr',
+  br: 'tl',
+};
 
 export class CheckersManager {
   private readonly data: CheckerStaticInfo[];
@@ -17,32 +31,40 @@ export class CheckersManager {
     });
   }
 
+  public hasCheckerAt(x: number, y: number): boolean {
+    return !!this.findChecker(x, y);
+  }
+
   public hasAllowedCells(x: number, y: number): boolean {
     return !!this.findAllowedCells(x, y).length;
   }
 
-  public findAllowedCells(x: number, y: number) {
-    let allowedCells: Coords[] = [];
+  public resolveAllowedCells(x: number, y: number): Coords[] {
+    return this.findAllowedCells(x, y).map(pathOrCoords => {
+      if (this.isPath(pathOrCoords)) {
+        return pathOrCoords[pathOrCoords.length - 1];
+      }
+      return pathOrCoords;
+    });
+  }
 
-    // top-left corner
-    allowedCells = allowedCells.concat(
-      this.findAllowedCellsFromCorner(x, y, 'tl')
-    );
+  public findAllowedCells(
+    x: number,
+    y: number,
+    excludeDirection?: Direction,
+    onlyCheckers?: boolean
+  ): (Coords | Path)[] {
+    let allowedCells: (Coords | Path)[] = [];
 
-    // top-right corner
-    allowedCells = allowedCells.concat(
-      this.findAllowedCellsFromCorner(x, y, 'tr')
-    );
+    for (const direction of directions) {
+      if (direction === excludeDirection) {
+        continue;
+      }
 
-    // bottom-left corner
-    allowedCells = allowedCells.concat(
-      this.findAllowedCellsFromCorner(x, y, 'bl')
-    );
-
-    // bottom-right corner
-    allowedCells = allowedCells.concat(
-      this.findAllowedCellsFromCorner(x, y, 'br')
-    );
+      allowedCells = allowedCells.concat(
+        this.findAllowedCellsFromCorner(x, y, direction, onlyCheckers)
+      );
+    }
 
     return allowedCells;
   }
@@ -50,25 +72,41 @@ export class CheckersManager {
   private findAllowedCellsFromCorner(
     fromX: number,
     fromY: number,
-    direction: Direction
-  ): Coords[] {
+    direction: Direction,
+    onlyCheckers?: boolean
+  ): (Coords | Path)[] {
     const [toX, toY] = this.findCoords(fromX, fromY, direction);
     const checker = this.findChecker(toX, toY);
-    const allowedCells: Coords[] = [];
+    const allowedCells: (Coords | Path)[] = [];
 
-    const isOutOfPlayground =
-      toX === -1 || toX === 8 || toY === -1 || toY === 8;
-
-    if (isOutOfPlayground) {
+    if (this.isOutOfPlayground(toX, toY)) {
       return allowedCells;
     }
 
     if (checker) {
       if (checker.whose === this.opponent) {
-        // allowedCells.push(getAllowedCellsFromCorner(toX, toY));
+        const root = this.findCoords(toX, toY, direction);
+        const [x, y] = root;
+        const canMove =
+          !this.hasCheckerAt(x, y) && !this.isOutOfPlayground(x, y);
+
+        if (canMove) {
+          const exclude = oppositeDirections[direction];
+          const paths = this.findAllowedCells(x, y, exclude, true);
+          allowedCells.push(root);
+          for (const path of paths) {
+            if (this.isPath(path)) {
+              allowedCells.push([root, ...path]);
+            } else {
+              allowedCells.push([root, path]);
+            }
+          }
+        }
       }
     } else {
-      allowedCells.push([toX, toY]);
+      if (['tl', 'tr'].includes(direction) && !onlyCheckers) {
+        allowedCells.push([toX, toY]);
+      }
     }
 
     return allowedCells;
@@ -85,5 +123,13 @@ export class CheckersManager {
       case 'br':
         return [x + 1, y + 1];
     }
+  }
+
+  private isOutOfPlayground(x: number, y: number): boolean {
+    return x === -1 || x === 8 || y === -1 || y === 8;
+  }
+
+  private isPath(path: Coords | Path): path is Path {
+    return typeof path[0] !== 'number';
   }
 }
