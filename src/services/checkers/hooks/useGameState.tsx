@@ -4,12 +4,8 @@ import {
   CheckersState,
   CheckersStateAction,
   CheckersStateActionTypes,
-} from '../reducers';
-import {
-  CheckersManager,
-  CheckerStaticInfo,
-  Coords,
-} from '../services/checkers-manager';
+} from '../reducer';
+import { CheckersManager, CheckerStaticInfo, Coords } from '../manager';
 
 export interface GameState {
   checkers: CheckersState;

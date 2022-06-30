@@ -1,4 +1,4 @@
-import { CheckerStaticInfo } from '../../services/checkers-manager';
+import { CheckerStaticInfo } from '../manager';
 
 interface CheckersMovePayload {
   fromX: number;

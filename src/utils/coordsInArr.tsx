@@ -1,4 +1,4 @@
-import { Coords } from '../services/checkers-manager';
+import { Coords } from '../services/checkers/manager';
 import { compareArrays } from './compareArrays';
 
 export function coordsInArr(coords: Coords, coordsArr: Coords[]): boolean {

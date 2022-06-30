@@ -1,9 +1,9 @@
 import initCheckersInfo from '../../assets/json/initCheckersInfo.json';
 import classes from './Playground.module.css';
-import { CheckerStaticInfo } from '../../services/checkers-manager';
+import { CheckerStaticInfo } from '../../services/checkers/manager';
 import { genMatrixMemberID } from '../../utils';
 import { Cell } from '../Cell/Cell';
-import { useGameState } from '../../hooks';
+import { useGameState } from '../../services/checkers/hooks';
 
 export function Playground() {
   const gameState = useGameState(initCheckersInfo as CheckerStaticInfo[]);

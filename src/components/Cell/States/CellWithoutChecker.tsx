@@ -1,5 +1,5 @@
 import { MouseEventHandler } from 'react';
-import { GameState } from '../../../hooks';
+import { GameState } from '../../../services/checkers/hooks';
 import { coordsInArr } from '../../../utils';
 import classes from '../Cell.module.css';
 

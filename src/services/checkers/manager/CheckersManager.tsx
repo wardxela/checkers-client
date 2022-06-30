@@ -11,45 +11,49 @@ export class CheckersManager {
     this.client = 'mine';
   }
 
-  public getChecker(x: number, y: number) {
+  public findChecker(x: number, y: number) {
     return this.data.find(checkerInfo => {
       return checkerInfo.x === x && checkerInfo.y === y;
     });
   }
 
-  public getAllowedCells(x: number, y: number) {
+  public hasAllowedCells(x: number, y: number): boolean {
+    return !!this.findAllowedCells(x, y).length;
+  }
+
+  public findAllowedCells(x: number, y: number) {
     let allowedCells: Coords[] = [];
 
     // top-left corner
     allowedCells = allowedCells.concat(
-      this.getAllowedCellsFromCorner(x, y, 'tl')
+      this.findAllowedCellsFromCorner(x, y, 'tl')
     );
 
     // top-right corner
     allowedCells = allowedCells.concat(
-      this.getAllowedCellsFromCorner(x, y, 'tr')
+      this.findAllowedCellsFromCorner(x, y, 'tr')
     );
 
     // bottom-left corner
     allowedCells = allowedCells.concat(
-      this.getAllowedCellsFromCorner(x, y, 'bl')
+      this.findAllowedCellsFromCorner(x, y, 'bl')
     );
 
     // bottom-right corner
     allowedCells = allowedCells.concat(
-      this.getAllowedCellsFromCorner(x, y, 'br')
+      this.findAllowedCellsFromCorner(x, y, 'br')
     );
 
     return allowedCells;
   }
 
-  private getAllowedCellsFromCorner(
+  private findAllowedCellsFromCorner(
     fromX: number,
     fromY: number,
     direction: Direction
   ): Coords[] {
-    const [toX, toY] = this.getCoords(fromX, fromY, direction);
-    const checker = this.getChecker(toX, toY);
+    const [toX, toY] = this.findCoords(fromX, fromY, direction);
+    const checker = this.findChecker(toX, toY);
     const allowedCells: Coords[] = [];
 
     const isOutOfPlayground =
@@ -70,7 +74,7 @@ export class CheckersManager {
     return allowedCells;
   }
 
-  private getCoords(x: number, y: number, direction: Direction): Coords {
+  private findCoords(x: number, y: number, direction: Direction): Coords {
     switch (direction) {
       case 'tl':
         return [x - 1, y - 1];

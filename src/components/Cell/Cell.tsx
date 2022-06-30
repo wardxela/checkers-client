@@ -1,4 +1,4 @@
-import { GameState } from '../../hooks';
+import { GameState } from '../../services/checkers/hooks';
 import { isCellDark } from '../../utils';
 import { CellWithoutChecker } from './States/CellWithoutChecker';
 import { CellWithChecker } from './States/CellWithChecker';
@@ -12,7 +12,7 @@ interface CellProps {
 
 export function Cell({ x, y, gameState }: CellProps) {
   const color = isCellDark(x, y) ? classes.dark : classes.light;
-  const checker = gameState.checkersManager.getChecker(x, y);
+  const checker = gameState.checkersManager.findChecker(x, y);
 
   if (!checker) {
     return (
