@@ -1,5 +1,5 @@
 import { MouseEventHandler } from 'react';
-import { GameState } from '../../../services/checkers/hooks';
+import { GameState } from '../../../services/checkers';
 import { coordsInArr } from '../../../utils';
 import classes from '../Cell.module.css';
 
@@ -31,7 +31,7 @@ export function CellWithoutChecker(props: CellWithoutCheckerProps) {
           toY: y,
         },
       });
-      // setCanMove(false);
+      setCanMove(false);
       setHintCells([]);
     };
   }

@@ -2,13 +2,19 @@ import { useReducer, useState } from 'react';
 import { checkersReducer } from '../reducer';
 import { CheckersManager, CheckerStaticInfo, Coords } from '../manager';
 import { GameState } from './types';
+import { useBotOpponent } from './useBotOpponent';
 
-export function useGameState(initCheckerInfo: CheckerStaticInfo[]): GameState {
+export function useGameState(
+  initCheckerInfo: CheckerStaticInfo[],
+  client: string,
+  opponent: string
+): GameState {
   const [checkers, dispatch] = useReducer(checkersReducer, initCheckerInfo);
   const [hintCells, setHintCells] = useState<Coords[]>([]);
   const [selectedChecker, setSelectedChecker] = useState<Coords>();
   const [canMove, setCanMove] = useState<boolean>(true);
-  const checkersManager = new CheckersManager(checkers);
+  const [gameOver, setGameOver] = useState<boolean>(false);
+  const checkersManager = new CheckersManager(checkers, client, opponent);
 
   const gameState = {
     checkers,
@@ -17,10 +23,14 @@ export function useGameState(initCheckerInfo: CheckerStaticInfo[]): GameState {
     setHintCells,
     selectedChecker,
     setSelectedChecker,
-    checkersManager,
-    setCanMove,
     canMove,
+    setCanMove,
+    gameOver,
+    setGameOver,
+    checkersManager,
   };
+
+  useBotOpponent(gameState);
 
   return gameState;
 }

@@ -1,4 +1,4 @@
-import { GameState } from '../../services/checkers/hooks';
+import { GameState } from '../../services/checkers';
 
 export interface CheckerProps {
   gameState: GameState;

@@ -8,7 +8,7 @@ export function AvailableClientChecker({ gameState, x, y }: CheckerProps) {
 
   const selectChecker = () => {
     setSelectedChecker([x, y]);
-    setHintCells(checkersManager.resolveAllowedCells(x, y));
+    setHintCells(checkersManager.findAllowedCells(x, y));
   };
 
   return <div className={styles} onClick={selectChecker}></div>;

@@ -1,4 +1,4 @@
-import { GameState } from '../../../services/checkers/hooks';
+import { GameState } from '../../../services/checkers';
 import { Checker } from '../../Checker/Checker';
 import classes from '../Cell.module.css';
 

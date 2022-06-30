@@ -5,7 +5,11 @@ import { Cell } from '../Cell/Cell';
 import { CheckerStaticInfo, useGameState } from '../../services/checkers';
 
 export function Playground() {
-  const gameState = useGameState(initCheckersInfo as CheckerStaticInfo[]);
+  const gameState = useGameState(
+    initCheckersInfo as CheckerStaticInfo[],
+    'mine',
+    'opponent'
+  );
 
   const cells: JSX.Element[] = [];
 

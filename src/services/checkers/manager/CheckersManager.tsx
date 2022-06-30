@@ -16,13 +16,17 @@ const oppositeDirections: OppositeDirections = {
 
 export class CheckersManager {
   private readonly data: CheckerStaticInfo[];
-  private opponent: string;
-  private client: string;
+  public readonly opponent: string;
+  public readonly client: string;
 
-  constructor(initData: CheckerStaticInfo[] = []) {
+  constructor(
+    initData: CheckerStaticInfo[] = [],
+    client: string,
+    opponent: string
+  ) {
     this.data = initData;
-    this.opponent = 'opponent';
-    this.client = 'mine';
+    this.client = client;
+    this.opponent = opponent;
   }
 
   public findChecker(x: number, y: number) {
@@ -39,8 +43,8 @@ export class CheckersManager {
     return !!this.findAllowedCells(x, y).length;
   }
 
-  public resolveAllowedCells(x: number, y: number): Coords[] {
-    return this.findAllowedCells(x, y).map(pathOrCoords => {
+  public findAllowedCells(x: number, y: number): Coords[] {
+    return this.resolveAllowedCells(x, y).map(pathOrCoords => {
       if (this.isPath(pathOrCoords)) {
         return pathOrCoords[pathOrCoords.length - 1];
       }
@@ -48,7 +52,7 @@ export class CheckersManager {
     });
   }
 
-  public findAllowedCells(
+  public resolveAllowedCells(
     x: number,
     y: number,
     excludeDirection?: Direction,
@@ -62,14 +66,14 @@ export class CheckersManager {
       }
 
       allowedCells = allowedCells.concat(
-        this.findAllowedCellsFromCorner(x, y, direction, onlyCheckers)
+        this.resolveAllowedCellsFromCorner(x, y, direction, onlyCheckers)
       );
     }
 
     return allowedCells;
   }
 
-  private findAllowedCellsFromCorner(
+  private resolveAllowedCellsFromCorner(
     fromX: number,
     fromY: number,
     direction: Direction,
@@ -85,20 +89,20 @@ export class CheckersManager {
 
     if (checker) {
       if (checker.whose === this.opponent) {
-        const root = this.findCoords(toX, toY, direction);
-        const [x, y] = root;
+        const nextCoords = this.findCoords(toX, toY, direction);
+        const [x, y] = nextCoords;
         const canMove =
           !this.hasCheckerAt(x, y) && !this.isOutOfPlayground(x, y);
 
         if (canMove) {
           const exclude = oppositeDirections[direction];
-          const paths = this.findAllowedCells(x, y, exclude, true);
-          allowedCells.push(root);
+          const paths = this.resolveAllowedCells(x, y, exclude, true);
+          allowedCells.push(nextCoords);
           for (const path of paths) {
             if (this.isPath(path)) {
-              allowedCells.push([root, ...path]);
+              allowedCells.push([nextCoords, ...path]);
             } else {
-              allowedCells.push([root, path]);
+              allowedCells.push([nextCoords, path]);
             }
           }
         }

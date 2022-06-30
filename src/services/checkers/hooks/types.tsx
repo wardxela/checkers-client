@@ -16,4 +16,6 @@ export interface GameState {
   canMove: boolean;
   setCanMove: Dispatch<SetStateAction<boolean>>;
   checkersManager: CheckersManager;
+  gameOver: boolean;
+  setGameOver: Dispatch<SetStateAction<boolean>>;
 }
