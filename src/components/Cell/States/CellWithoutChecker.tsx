@@ -10,12 +10,8 @@ interface CellWithoutCheckerProps {
   y: number;
 }
 
-export function CellWithoutChecker({
-  color,
-  gameState,
-  x,
-  y,
-}: CellWithoutCheckerProps) {
+export function CellWithoutChecker(props: CellWithoutCheckerProps) {
+  const { color, gameState, x, y } = props;
   const { hintCells, selectedChecker, setCanMove, setHintCells, dispatch } =
     gameState;
 

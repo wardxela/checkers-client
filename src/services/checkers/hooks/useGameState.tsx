@@ -1,23 +1,7 @@
-import { Dispatch, SetStateAction, useReducer, useState } from 'react';
-import {
-  checkersReducer,
-  CheckersState,
-  CheckersStateAction,
-  CheckersStateActionTypes,
-} from '../reducer';
+import { useReducer, useState } from 'react';
+import { checkersReducer } from '../reducer';
 import { CheckersManager, CheckerStaticInfo, Coords } from '../manager';
-
-export interface GameState {
-  checkers: CheckersState;
-  dispatch: Dispatch<CheckersStateAction<CheckersStateActionTypes>>;
-  hintCells: Coords[];
-  setHintCells: Dispatch<SetStateAction<Coords[]>>;
-  selectedChecker: Coords | undefined;
-  setSelectedChecker: Dispatch<SetStateAction<Coords | undefined>>;
-  canMove: boolean;
-  setCanMove: Dispatch<SetStateAction<boolean>>;
-  checkersManager: CheckersManager;
-}
+import { GameState } from './types';
 
 export function useGameState(initCheckerInfo: CheckerStaticInfo[]): GameState {
   const [checkers, dispatch] = useReducer(checkersReducer, initCheckerInfo);

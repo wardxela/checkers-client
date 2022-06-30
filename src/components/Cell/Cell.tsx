@@ -1,4 +1,4 @@
-import { GameState } from '../../services/checkers/hooks';
+import { GameState } from '../../services/checkers';
 import { isCellDark } from '../../utils';
 import { CellWithoutChecker } from './States/CellWithoutChecker';
 import { CellWithChecker } from './States/CellWithChecker';

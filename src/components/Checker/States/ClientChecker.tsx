@@ -3,12 +3,12 @@ import { NotAvailableClientChecker } from './NotAvailableClientChecker';
 import { CheckerProps } from '../CheckerProps';
 
 export function ClientChecker(props: CheckerProps) {
-  const allowedCells = props.gameState.checkersManager.getAllowedCells(
+  const hasAllowedCells = props.gameState.checkersManager.hasAllowedCells(
     props.x,
     props.y
   );
 
-  if (allowedCells.length && props.gameState.canMove) {
+  if (hasAllowedCells && props.gameState.canMove) {
     return <AvailableClientChecker {...props} />;
   }
 
